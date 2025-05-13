@@ -3,7 +3,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
-from finance_analyzer.data.loader import DataLoader as ExternalDataLoader
 
 # 設置頁面配置
 st.set_page_config(
