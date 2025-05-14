@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
+import os
 
 # 設置頁面配置
 st.set_page_config(
@@ -59,7 +60,12 @@ class FinancialData:
     def __init__(self):
         # 讀取CSV文件
         try:
-            self.df = pd.read_csv('selected_companies_financials.csv')
+            # 獲取當前文件所在目錄
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            # 構建CSV文件的完整路徑
+            csv_path = os.path.join(current_dir, 'selected_companies_financials_cleaned.csv')
+            
+            self.df = pd.read_csv(csv_path)
             # 確保年份列是整數類型
             self.df['年份'] = self.df['年份'].astype(int)
             # 確保公司代碼是字符串類型
@@ -95,6 +101,7 @@ class FinancialData:
             "獲利能力-稅前純益佔實收資本比率(%)": "獲利能力-稅前純益佔實收資本比率(%)",
             "獲利能力-純益率(%)": "獲利能力-純益率(%)",
             "獲利能力-每股盈餘(元)": "獲利能力-每股盈餘(元)",
+            "成長能力-營收成長率(%)": "成長能力-營收成長率(%)",
             "現金流量-現金流量比率(%)": "現金流量-現金流量比率(%)",
             "現金流量-現金流量允當比率(%)": "現金流量-現金流量允當比率(%)",
             "現金流量-現金再投資比率(%)": "現金流量-現金再投資比率(%)"
@@ -407,7 +414,7 @@ class FinancialAnalysisApp:
                 "獲利能力-純益率(%)",
                 "獲利能力-權益報酬率(%)",
                 "獲利能力-每股盈餘(元)",
-                "現金流量-現金流量比率(%)"
+                "成長能力-營收成長率(%)"
             ]
         )
 
